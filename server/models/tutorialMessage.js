@@ -6,7 +6,7 @@ const tutorialSchema = mongoose.Schema({
     creator: String,
     finishedAt:{
         type: Date,
-        default: new Date();
+        default: new Date(),
     }
 });
 
