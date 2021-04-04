@@ -1,4 +1,5 @@
 import PostMessage from "../models/tutorialMessage.js";
+import mongoose from 'mongoose';
 
 export const getTutorial = async (req,res)=>{
     try{
@@ -20,4 +21,22 @@ export const createPost = async (req,res)=>{
     } catch (e){
         res.status(409).json({message: e.message});
     }
+}
+
+export const updatePost = async(req,res)=>{
+    const {id: _id} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id,{...post, id},{new:true});
+
+    res.json(updatedPost)
+
+}
+
+export const deletePost = async(req,res) =>{
+    const {id} = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+    await PostMessage.findByIdAndRemove(id);
+    res.json({message: 'Post deleted succesfully'});
 }

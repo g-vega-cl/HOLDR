@@ -8,11 +8,11 @@ import tutorialRoutes from './routes/tutorial.js';
 
 const app = express();
 
-app.use('/tutorial', tutorialRoutes);
-
 app.use(bodyParser.json({ limit: "5mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 app.use(cors());
+
+app.use('/tutorial', tutorialRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://g_vega_cl:Generic_Holdr_123_@holdr.5r4op.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
