@@ -1,18 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { AppBar, Avatar, Button, Typography, Toolbar } from "@material-ui/core";
 import frog from "images/frog.png";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
 
+const u = {
+  result: {
+    name: "",
+    imageUrl: ""
+  },
+}
 const Navbar = () => {
   const classes = useStyles();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile') || JSON.stringify(u)));
 
-  const user = {
-    result: {
-      name: "",
-      imageUrl: ""
-    },
-  };
+  console.log("usr ", user)
+
+
+
 
   const logout = () =>{
 
