@@ -13,12 +13,14 @@ import Input from "components/Auth/input";
 import { GoogleLogin } from "react-google-login";
 import Icon from './icon.js';
 import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsIsignUp] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
   
   const handleSubmit = () => {};
   const handleChange = () => {};
@@ -39,6 +41,7 @@ const Auth = () => {
 
     try{
       dispatch({type:'AUTH', data: {result,token}});
+      history.push("/");
     }catch(e){
       console.log(e)
     }

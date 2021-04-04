@@ -2,7 +2,9 @@ import React, {useState, useEffect} from "react";
 import { AppBar, Avatar, Button, Typography, Toolbar } from "@material-ui/core";
 import frog from "images/frog.png";
 import useStyles from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import {useDispatch} from 'react-redux';
+
 
 const u = {
   result: {
@@ -12,15 +14,25 @@ const u = {
 }
 const Navbar = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile') || JSON.stringify(u)));
 
   console.log("usr ", user)
 
+  useEffect(()=>{
+    const token = user?.token;
 
+    //JWT... (For manual signup)
+    setUser(JSON.parse(localStorage.getItem('profile') || JSON.stringify(u)))
+  },[location])
 
 
   const logout = () =>{
-
+    dispatch({type: 'LOGOUT'});
+    setUser(u);
+    history.push('/');
   }
 
   return (
