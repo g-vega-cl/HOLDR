@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 
-import {useDispatch} from 'react-redux';
-import {getPosts} from "actions/posts";
+import { useDispatch } from "react-redux";
+import { getPosts } from "actions/posts";
 
 import frog from "./images/frog.png";
 import { Form } from "./components/Form/Form";
@@ -14,9 +14,9 @@ const App = () => {
   const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getPosts());
-  },[dispatch, currentId]);
+  }, [dispatch, currentId]);
 
   return (
     <Container maxWidth="lg">
@@ -35,10 +35,10 @@ const App = () => {
         <Container>
           <Grid container justify="space-between" alignItems="stretch">
             <Grid item xs={12} sm={7}>
-              <Posts setCurrentId={setCurrentId}/>
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId}/>
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
