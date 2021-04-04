@@ -1,4 +1,4 @@
-import React from "react";
+import {FETCH_ALL, CREATE, UPDATE, DELETE} from 'constants/actionTypes';
 
 import * as api from "../api";
 
@@ -8,7 +8,7 @@ import * as api from "../api";
 export const getPosts = () => async (dispatch: any) => {
   try {
     const { data } = await api.fetchPosts();
-    dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
       console.log(error);
   }
@@ -17,7 +17,7 @@ export const getPosts = () => async (dispatch: any) => {
 export const createPost = (post: any) => async(dispatch:any) =>{
   try{
     const {data} = await api.createPost(post);
-    dispatch({type: 'CREATE', payload: data});
+    dispatch({type: CREATE, payload: data});
   } catch(e){
     console.log(e);
   }
@@ -27,7 +27,7 @@ export const updatePost = (id:any,post:any) => async(dispatch:any) =>{
   try{
     const {data} = await api.updatePost(id,post);
 
-    dispatch({type: 'UPDATE', payload: data})
+    dispatch({type: UPDATE, payload: data})
 
   }catch(e){
     console.log(e)
@@ -37,7 +37,7 @@ export const updatePost = (id:any,post:any) => async(dispatch:any) =>{
 export const deletePost = (id: String) => async(dispatch:any) => {
   try{
     await api.deletePost(id);
-    dispatch({type: 'DELETE', payload: id})
+    dispatch({type: DELETE, payload: id})
   } catch(error){
     console.log(error);
   }
