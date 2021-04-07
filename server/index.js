@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import tutorialRoutes from './routes/tutorial.js';
+import userRoutes from './routes/users.js';
 
 
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 app.use(cors());
 
 app.use('/tutorial', tutorialRoutes);
+app.use('/users', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 

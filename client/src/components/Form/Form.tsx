@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 //Get current id of post.
 
 interface IpostData {
-  creator: string;
   title: string;
   message: string;
 }
@@ -22,7 +21,6 @@ export const Form = ({
 }) => {
   const classes = useStyles();
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
   });
@@ -30,6 +28,8 @@ export const Form = ({
     currentId ? state.posts.find((p: any) => p._id === currentId) : null
   );
   const dispatch = useDispatch();
+  const user = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile') || '') :  JSON.parse('{"result":{"name":"Guest"}}');
+  
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -39,16 +39,13 @@ export const Form = ({
     e.preventDefault();
 
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(updatePost(currentId, {...postData, name: user?.result?.name}));
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({...postData, name: user?.result?.name}));
     }
     clear();
   };
 
-  const handleCreatorOnChange = (e: any) => {
-    setPostData({ ...postData, creator: e.target.value });
-  };
 
   const handleTitleOnChange = (e: any) => {
     setPostData({ ...postData, title: e.target.value });
@@ -66,11 +63,21 @@ export const Form = ({
   const clear = () => {
     setCurrentId(null);
     setPostData({
-      creator: "",
       title: "",
       message: "",
     });
   };
+
+  if(!user?.result?.name){
+    return(
+      <Paper className={classes.paper}>
+        <Typography variant ="h6" align="center">
+          Please sign in to post
+        </Typography>
+
+      </Paper>
+    )
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -83,14 +90,6 @@ export const Form = ({
         <Typography variant="h6">
           {currentId ? "editing" : "Creating"} a Feedback
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={handleCreatorOnChange}
-        />
         <TextField
           name="title"
           variant="outlined"

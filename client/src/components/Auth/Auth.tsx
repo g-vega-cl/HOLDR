@@ -11,45 +11,56 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "components/Auth/input";
 import { GoogleLogin } from "react-google-login";
-import Icon from './icon.js';
-import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import Icon from "./icon.js";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {signin, signup} from 'actions/auth';
+
+const initialState = {firstName: '', lastName:'', email:'', password:''}
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsIsignUp] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
   const history = useHistory();
-  
-  const handleSubmit = () => {};
-  const handleChange = () => {};
 
-  const handleShowPassword = (showPass: boolean) => {
-    showPass ? setShowPassword(showPass) : setShowPassword(!showPassword);
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    if(isSignUp){
+      dispatch(signup(formData,history));
+    } else{
+      dispatch(signin(formData,history));
+    }
   };
+  const handleChange = (e:any) => {
+    setFormData({...formData, [e.target.name]:e.target.value});
+  };
+
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   const switchMode = () => {
     setIsIsignUp(!isSignUp);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
-  const googleSuccess = async (res: any) =>{
-    console.log("goog success ", res)
+  const googleSuccess = async (res: any) => {
+    console.log("goog success ", res);
     const result = res?.profileObj;
     const token = res?.tokenId;
 
-    try{
-      dispatch({type:'AUTH', data: {result,token}});
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
       history.push("/");
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
-  const googleFailure = (error:any) =>{
-    console.log("GOOGLE FAILURE", error)
-  }
+  const googleFailure = (error: any) => {
+    console.log("GOOGLE FAILURE", error);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -70,8 +81,8 @@ const Auth = () => {
                   half
                 />
                 <Input
-                  name="firstName"
-                  label="First Name"
+                  name="lastName"
+                  label="Last Name"
                   handleChange={handleChange}
                   half
                 />

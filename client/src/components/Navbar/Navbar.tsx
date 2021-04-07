@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { AppBar, Avatar, Button, Typography, Toolbar } from "@material-ui/core";
 import frog from "images/frog.png";
+import decode from 'jwt-decode';
 import useStyles from "./styles";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import {useDispatch} from 'react-redux';
@@ -24,6 +25,10 @@ const Navbar = () => {
   useEffect(()=>{
     const token = user?.token;
 
+    if(token){
+      const decodedToken = decode<any>(token);
+      if(decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
     //JWT... (For manual signup)
     setUser(JSON.parse(localStorage.getItem('profile') || JSON.stringify(u)))
   },[location])
