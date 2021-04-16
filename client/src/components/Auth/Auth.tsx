@@ -63,7 +63,7 @@ const Auth = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container>
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -139,7 +139,7 @@ const Auth = () => {
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
-          <Grid container justify="flex-end">
+          <Grid container justify="flex-start">
             <Grid item>
               <Button onClick={switchMode}>
                 {isSignUp

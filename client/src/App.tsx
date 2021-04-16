@@ -7,13 +7,11 @@ import Auth from 'components/Auth/Auth';
 const App = () => {
   return (
     <BrowserRouter>
-      <Container maxWidth="lg">
-        <Navbar />
+        <Navbar/>
         <Switch>
           <Route path="/" exact component={Home}/>
           <Route path="/auth" exact component={Auth}/>
         </Switch>
-      </Container>
     </BrowserRouter>
   );
 };

@@ -84,7 +84,7 @@ export const Form = ({
       <form
         autoComplete="off"
         noValidate
-        className={`${classes.root} ${classes.form}`}
+        className={`${classes.root}`}
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">

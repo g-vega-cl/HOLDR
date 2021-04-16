@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grow, Grid } from "@material-ui/core";
-import { Form } from "components/Form/Form";
-import { Posts } from "components/Posts/Posts";
+import { Container, Grow, Grid, Typography } from "@material-ui/core";
+import { HoldrRules } from "./HoldrRules";
+import { TypesOfCoupons } from "./TypesOfCoupons";
 import { useDispatch } from "react-redux";
 import { getPosts } from "actions/posts";
 
@@ -12,15 +12,30 @@ const Home = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch, currentId]);
+
   return (
     <Grow in>
-      <Container>
-        <Grid container justify="space-between" alignItems="stretch">
-          <Grid item xs={12} sm={7}>
-            <Posts setCurrentId={setCurrentId} />
+      <Container
+        style={{
+          margin: "0",
+          padding: "0",
+          maxWidth: "150vw",
+          backgroundColor: "rgb(229, 238, 229,.5)",
+          fontWeight:'bold',
+        }}
+      >
+        <Grid
+          container
+          style={{ padding: "23px" }}
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid item xs={12}>
+            <HoldrRules />
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Form currentId={currentId} setCurrentId={setCurrentId} />
+          <Grid item xs={12}>
+            <TypesOfCoupons />
           </Grid>
         </Grid>
       </Container>

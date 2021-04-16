@@ -1,64 +1,77 @@
-import React, {useState, useEffect} from "react";
-import { AppBar, Avatar, Button, Typography, Toolbar } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  Grid,
+  Typography,
+  Toolbar,
+} from "@material-ui/core";
 import frog from "images/frog.png";
-import decode from 'jwt-decode';
+import decode from "jwt-decode";
 import useStyles from "./styles";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import {useDispatch} from 'react-redux';
-
+import { useDispatch } from "react-redux";
+import {
+  createMuiTheme,
+  withStyles,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import { green } from "@material-ui/core/colors";
 
 const u = {
   result: {
     name: "",
-    imageUrl: ""
+    imageUrl: "",
   },
-}
+};
+
 const Navbar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile') || JSON.stringify(u)));
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("profile") || JSON.stringify(u))
+  );
 
-  console.log("usr ", user)
+  console.log("usr ", user);
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = user?.token;
 
-    if(token){
+    if (token) {
       const decodedToken = decode<any>(token);
-      if(decodedToken.exp * 1000 < new Date().getTime()) logout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
     //JWT... (For manual signup)
-    setUser(JSON.parse(localStorage.getItem('profile') || JSON.stringify(u)))
-  },[location])
+    setUser(JSON.parse(localStorage.getItem("profile") || JSON.stringify(u)));
+  }, [location]);
 
-
-  const logout = () =>{
-    dispatch({type: 'LOGOUT'});
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
     setUser(u);
-    history.push('/');
-  }
+    history.push("/");
+  };
+
+  const greenTheme = createMuiTheme({
+    palette: {
+      primary: green,
+    },
+  });
 
   return (
     <AppBar position="static" color="inherit" className={classes.appBar}>
-      <div>
         <Typography
           component={Link}
           to="/"
-          variant="h2"
+          variant="h3"
           align="center"
           className={classes.heading}
         >
-          Review
+          HOLDR
         </Typography>
-        <img
-          src={frog}
-          alt="feedback"
-          height="60"
-          className={classes.image}
-        ></img>
-      </div>
       <Toolbar className={classes.toolbar}>
         {user.result.name ? (
           <div className={classes.profile}>
@@ -82,14 +95,16 @@ const Navbar = () => {
             </Button>
           </div>
         ) : (
-          <Button
-            component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
-          >
-            Sign in
-          </Button>
+          <ThemeProvider theme={greenTheme}>
+            <Button
+              component={Link}
+              to="/auth"
+              variant="contained"
+              color="primary"
+            >
+              Sign in
+            </Button>
+          </ThemeProvider>
         )}
       </Toolbar>
     </AppBar>
