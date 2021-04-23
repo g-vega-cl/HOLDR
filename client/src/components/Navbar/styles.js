@@ -9,8 +9,8 @@ export default makeStyles((theme) => ({
     alignItems: 'center',
     background: 'transparent',
     boxShadow: 'none',
-    marginTop:'-8px',
-    backgroundColor:"rgb(229, 238, 229,.5)",
+    marginTop:'-2px',
+    backgroundColor:"rgb(245, 250, 245,.5)", //! Also in Home
   },
   heading: {
     color: 'black',

@@ -4,6 +4,7 @@ import { HoldrRules } from "./HoldrRules";
 import { TypesOfCoupons } from "./TypesOfCoupons";
 import { useDispatch } from "react-redux";
 import { getPosts } from "actions/posts";
+import { RiskCharts } from "components/Home/RiskCharts";
 
 const Home = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -20,8 +21,9 @@ const Home = () => {
           margin: "0",
           padding: "0",
           maxWidth: "150vw",
-          backgroundColor: "rgb(229, 238, 229,.5)",
-          fontWeight:'bold',
+          backgroundColor: "rgb(245, 250, 245,.5)",  //! Also in NavBar styles
+          fontWeight: "bold",
+          overflow: "hidden",
         }}
       >
         <Grid
@@ -36,6 +38,9 @@ const Home = () => {
           </Grid>
           <Grid item xs={12}>
             <TypesOfCoupons />
+          </Grid>
+          <Grid item xs={12}>
+            <RiskCharts type={"2"}/>
           </Grid>
         </Grid>
       </Container>
