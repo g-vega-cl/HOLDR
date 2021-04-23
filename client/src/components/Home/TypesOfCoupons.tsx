@@ -50,7 +50,6 @@ const rows = [
 ];
 
 const stars = (num: number) => {
-  console.log(num);
   if (num === 1) {
     return (
       <>
@@ -81,14 +80,21 @@ const stars = (num: number) => {
 };
 
 //Make new route. buy route.
+interface ITypesOfCoupons{
+  setCouponType: any;
+}
 
-export const TypesOfCoupons = () => {
+export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
   const history = useHistory();
   const classes = useStyles();
 
   const goToBuy = (couponId: string) => {
     history.push(`/buy-${couponId}`);
   };
+
+  const updateCouponType=(newType: string)=>{
+    setCouponType(newType);
+  }
   return (
     <div>
       <Box fontWeight="fontWeightBold" marginBottom="10px">
@@ -113,7 +119,7 @@ export const TypesOfCoupons = () => {
             {rows.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
-                  {row.name}
+                  <Button onClick={()=>updateCouponType(row.buy)}>{row.name}</Button>
                 </StyledTableCell>
                 <StyledTableCell align="right" style={{ color: "green" }}>
                   {row.returns}%

@@ -1,11 +1,21 @@
-import { useState, useEffect } from "react";
-import { Box, Container, Grow, Grid, Typography } from "@material-ui/core";
+import { useState, useEffect, useRef } from "react";
+import { Button, Paper } from "@material-ui/core";
 import CanvasJSReact from "./chartAssets/canvasjs.react";
+import "./styles.scss";
+import { YoutubeSearchedForSharp } from "@material-ui/icons";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export const RiskCharts = (type: any) => {
-  console.log("chart type: ", type.type);
   const [options, setOptions] = useState({});
+  const [
+    isCouponCalculationModalOpen,
+    setIsCouponCalculationModalOpen,
+  ] = useState(false);
+  const couponModalRef = useRef<HTMLDivElement>(null);
+
+  const toggleCouponCalculationModal = () => {
+    setIsCouponCalculationModalOpen(!isCouponCalculationModalOpen);
+  };
 
   useEffect(() => {
     if (type.type == "1") {
@@ -92,13 +102,13 @@ export const RiskCharts = (type: any) => {
       });
     }
 
-    if (type.type == "2") {
+    if (type.type == "3") {
       setOptions({
         theme: "light2",
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: `Risk 1. 70% $ITOT  + 30% $AAXJ`,
+          text: `Risk 3. 70% $ITOT  + 30% $AAXJ`,
         },
         axisY: {
           title: "Price",
@@ -176,7 +186,7 @@ export const RiskCharts = (type: any) => {
       });
     }
 
-    if (type.type == "3") {
+    if (type.type == "5") {
       setOptions({
         theme: "light2",
         animationEnabled: true,
@@ -259,19 +269,167 @@ export const RiskCharts = (type: any) => {
         ],
       });
     }
+  }, [type, isCouponCalculationModalOpen]);
+
+  //https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-with-react-hook-ba77c37c7e82
+  const handleClick = (e: any) => {
+    if (couponModalRef?.current?.contains(e.target)) {
+      // inside click
+      return;
+    } // outside click
+    setIsCouponCalculationModalOpen(false);
+  };
+
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClick); // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
   }, []);
 
   // You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods
   return (
     <div>
-    <h1>Price chart***</h1>
+      <h1>Price chart***</h1>
       {options && (
         <CanvasJSChart
           options={options}
           /* onRef={ref => this.chart = ref} */
         />
       )}
-    <p>***How is coupon price calculated?</p>
+      <Button
+        style={{ marginTop: "10px" }}
+        onClick={toggleCouponCalculationModal}
+      >
+        ***How is coupon price calculated?
+      </Button>
+      {isCouponCalculationModalOpen && (
+        <Paper
+          elevation={3}
+          className="coupon-paper-calculation"
+          ref={couponModalRef}
+        >
+          {type.type == "1" && (
+            <div style={{ padding: "10px 20px" }}>
+              <p>
+                The price of the coupon is referenced to 70$USD of{" "}
+                <a
+                  target="_blank"
+                  href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ABNDX"
+                >
+                  $BNDX
+                </a>{" "}
+                Plus 30$USD of{" "}
+                <a
+                  target="_blank"
+                  href="https://www.tradingview.com/chart/?symbol=AMEX%3ASPY"
+                >
+                  $SPY
+                </a>{" "}
+                bought at the open of June 1 2016.{" "}
+              </p>
+              <p>
+                The price of $SPY in June 1st 2016 was 210. And we bought
+                (30/210) 0.143 shares.
+              </p>
+              <p>
+                The price of $BNDX in June 1st 2016 was 54.7. And we bought
+                (70/54.7) 1.28 shares.
+              </p>
+
+              <p>
+                Finally, to get the price at any point in time, multiply the
+                ammount of shares of each ticker ($SPY is a ticker) by its
+                price.
+              </p>
+              <p>
+                {" "}
+                Eg. In april 2021 $SPY = 411.45 and $BNDX = 57.11. So the price
+                is: 0.143 * 411.45 + 1.28*57.11 = 131.92!
+              </p>
+            </div>
+          )}
+          {type.type == "3" && (
+            <div style={{ padding: "10px 20px" }}>
+              <p>
+                The price of the coupon is referenced to 70$USD of{" "}
+                <a
+                  target="_blank"
+                  href="https://www.tradingview.com/chart/?symbol=AMEX%3AITOT"
+                >
+                  $ITOT
+                </a>{" "}
+                Plus 30$USD of{" "}
+                <a
+                  target="_blank"
+                  href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAXJ"
+                >
+                  $AAXJ
+                </a>{" "}
+                bought at the open of June 1 2016.{" "}
+              </p>
+              <p>
+                The price of $ITOT in June 1st 2016 was 47.8 And we bought
+                (70/47.8) 1.465 shares.
+              </p>
+              <p>
+                The price of $AAXJ in June 1st 2016 was 53.31 And we bought
+                (30/53.31) 0.563 shares.
+              </p>
+
+              <p>
+                Finally, to get the price at any point in time, multiply the
+                ammount of shares of each ticker ($ITOT is a ticker) by its
+                price.{" "}
+              </p>
+              <p>
+                Eg. In april 2021 $ITOT = 95.07 and $AAXJ = 93.32. So the price
+                is: 1.465 * 95.07 + 0.563*93.32 = 191.77!
+              </p>
+            </div>
+          )}
+          {type.type == "5" && (
+            <div style={{ padding: "10px 20px" }}>
+              <p>
+                The price of the coupon is referenced to 50$USD of{" "}
+                <a
+                  target="_blank"
+                  href="https://www.tradingview.com/symbols/NASDAQ-TQQQ/"
+                >
+                  $TQQQ
+                </a>{" "}
+                Plus 50$USD of{" "}
+                <a
+                  target="_blank"
+                  href="https://www.tradingview.com/symbols/AMEX-UPRO/"
+                >
+                  $UPRO
+                </a>{" "}
+                bought at the open of June 1 2016.{" "}
+              </p>
+              <p>
+                The price of $TQQQ in June 1st 2016 was 8.7. And we bought
+                (50/8.7) 5.742 shares.
+              </p>
+              <p>
+                The price of $UPRO in June 1st 2016 was 22.26. And we bought
+                (50/22.26) 2.246 shares.
+              </p>
+
+              <p>
+                Finally, to get the price at any point in time, multiply the
+                ammount of shares of each ticker ($SPY is a ticker) by its
+                price.
+              </p>
+              <p>
+                Eg. In april 2021 $TQQQ = 106.63 and $UPRO = 100.87. So the
+                price is: 5.742 * 106.63 + 2.246*100.87 = 838.8!
+              </p>
+            </div>
+          )}
+        </Paper>
+      )}
     </div>
   );
 };

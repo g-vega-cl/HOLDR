@@ -9,6 +9,7 @@ import { RiskCharts } from "components/Home/RiskCharts";
 const Home = () => {
   const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
+  const [couponType, setCouponType] = useState("1");
 
   useEffect(() => {
     dispatch(getPosts());
@@ -37,10 +38,10 @@ const Home = () => {
             <HoldrRules />
           </Grid>
           <Grid item xs={12}>
-            <TypesOfCoupons />
+            <TypesOfCoupons setCouponType={setCouponType}/>
           </Grid>
           <Grid item xs={12}>
-            <RiskCharts type={"2"}/>
+            <RiskCharts type={couponType}/>
           </Grid>
         </Grid>
       </Container>
