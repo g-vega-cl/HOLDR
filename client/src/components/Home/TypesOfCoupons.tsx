@@ -109,7 +109,7 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="right">5 year return*</StyledTableCell>
               <StyledTableCell align="right">
-                5 year maximum possible loss**
+                5 year maximum loss**
               </StyledTableCell>
               <StyledTableCell align="right">Risk rating</StyledTableCell>
               <StyledTableCell align="right">Buy</StyledTableCell>
@@ -144,7 +144,7 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
         * From 2016/05/01 to 2021/04/01. Includes dividends. 
       </Box>
       <Box fontWeight="fontWeightBold" marginBottom="10px">
-        ** Worst possible scenario. Buy at top and sell at bottom
+        ** Worst case historical scenario. Buy at top and sell at bottom
       </Box>
       
     </div>

@@ -22,5 +22,6 @@ export const updatePost = (id: any, updatedPost: any) => API.patch(`/tutorial}/$
 export const deletePost = (id: String) => API.delete(`/tutorial/${id}`);
 
 export const signIn = (formData: any) => API.post('/users/signin', formData);
-
 export const signUp = (formData: any) => API.post('/users/signup', formData);
+
+export const createPayment = (payment: any) => API.post('/userPayments',payment)
