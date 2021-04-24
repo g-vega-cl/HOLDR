@@ -89,7 +89,7 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
   const classes = useStyles();
 
   const goToBuy = (couponId: string) => {
-    history.push(`/buy-${couponId}`);
+    history.push(`/buy/${couponId}`);
   };
 
   const updateCouponType=(newType: string)=>{
