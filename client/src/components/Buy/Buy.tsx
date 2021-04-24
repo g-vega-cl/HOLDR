@@ -10,8 +10,6 @@ import {
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { createPayment } from "actions/payment";
 
 const u = {
   result: {
@@ -30,7 +28,6 @@ const Buy = () => {
   );
   const [dollarsBought, setDollarsBougth] = useState(10);
   const { type } = useParams<{ type?: string }>();
-  const dispatch = useDispatch();
 
   const updateDollarsBought = (e: any) => {
     setDollarsBougth(e.target.value);
@@ -59,17 +56,6 @@ const Buy = () => {
           if (response.data.success) {
             console.log("Successful payment");
             setSuccess(true);
-
-            //Send data to mongo.
-            dispatch(
-              createPayment({
-                email: user?.result?.email,
-                ammount: dollarsBought * 100,
-                couponType: type,
-                couponPrice: 190,
-                buyDate: new Date(),
-              })
-            );
           }
         } catch (error) {
           console.log("Error", error);
