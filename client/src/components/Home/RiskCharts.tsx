@@ -340,7 +340,7 @@ export const RiskCharts = (type: any) => {
 
               <p>
                 Finally, to get the price at any point in time, multiply the
-                ammount of shares of each ticker ($SPY is a ticker) by its
+                amount of shares of each ticker ($SPY is a ticker) by its
                 price.
               </p>
               <p>
@@ -380,7 +380,7 @@ export const RiskCharts = (type: any) => {
 
               <p>
                 Finally, to get the price at any point in time, multiply the
-                ammount of shares of each ticker ($ITOT is a ticker) by its
+                amount of shares of each ticker ($ITOT is a ticker) by its
                 price.{" "}
               </p>
               <p>
@@ -419,7 +419,7 @@ export const RiskCharts = (type: any) => {
 
               <p>
                 Finally, to get the price at any point in time, multiply the
-                ammount of shares of each ticker ($SPY is a ticker) by its
+                amount of shares of each ticker ($SPY is a ticker) by its
                 price.
               </p>
               <p>

@@ -3,6 +3,7 @@ import {FETCH_ALL, CREATE, UPDATE, DELETE} from 'constants/actionTypes';
 export default (posts: any = [], action: any) => {
   switch (action.type) {
     case FETCH_ALL:
+      console.log("posts reducer payload", action.payload)
       return action.payload;
     case CREATE:
       return [...posts, action.payload];

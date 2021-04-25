@@ -5,3 +5,5 @@ export const FETCH_ALL = 'FETCH_ALL';
 export const LIKE = 'LIKE';
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
+export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS';
+export const CREATE_TRANSACTIONS = 'CREATE_TRANSACTIONS';

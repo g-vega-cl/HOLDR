@@ -24,4 +24,5 @@ export const deletePost = (id: String) => API.delete(`/tutorial/${id}`);
 export const signIn = (formData: any) => API.post('/users/signin', formData);
 export const signUp = (formData: any) => API.post('/users/signup', formData);
 
-export const createPayment = (payment: any) => API.post('/userPayments',payment)
+export const fetchTransactions = () => API.get('/payment');
+export const createTransaction = (newTransaction: any) => API.post('/payment', newTransaction);

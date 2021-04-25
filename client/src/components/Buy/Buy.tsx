@@ -10,6 +10,8 @@ import {
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactions, createTransaction } from 'actions/stripe';
 
 const u = {
   result: {
@@ -28,6 +30,18 @@ const Buy = () => {
   );
   const [dollarsBought, setDollarsBougth] = useState(10);
   const { type } = useParams<{ type?: string }>();
+  const dispatch = useDispatch();
+  const transactions = useSelector((state:any)=>state.stripe);
+  const [paymentData, setPaymentData] = useState({
+    email: '',
+    type: '',
+    amount: 0,
+    couponPrice: 0,
+    boughtAt: new Date()
+  });
+  const [couponPrice,setCouponPrice] = useState(200); //! Probably will come as prop later.
+
+  console.log("transactions ", transactions);
 
   const updateDollarsBought = (e: any) => {
     setDollarsBougth(e.target.value);
@@ -36,6 +50,22 @@ const Buy = () => {
   const updateLoadingPayment = () => {
     setLoadingPayment(true);
   };
+
+  useEffect(()=>{
+    dispatch(getTransactions());
+  },[])
+
+  useEffect(()=>{
+    if(type){
+      setPaymentData({
+        email: user?.result?.email,
+        type: type,
+        amount: dollarsBought / couponPrice,
+        couponPrice: couponPrice,
+        boughtAt: new Date()
+      })
+    }
+  }, [setPaymentData, user, type, dollarsBought, couponPrice]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -57,6 +87,10 @@ const Buy = () => {
             console.log("Successful payment");
             setSuccess(true);
           }
+
+          //Send transaction to mongo
+          dispatch(createTransaction(paymentData));
+
         } catch (error) {
           console.log("Error", error);
         }
