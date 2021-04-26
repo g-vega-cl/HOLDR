@@ -108,7 +108,7 @@ export const RiskCharts = (type: any) => {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: `Risk 3. 70% $ITOT  + 30% $AAXJ`,
+          text: `Risk 3. 100% $VT`,
         },
         axisY: {
           title: "Price",
@@ -120,66 +120,66 @@ export const RiskCharts = (type: any) => {
             xValueFormatString: "MMM YYYY",
             markerSize: 5,
             dataPoints: [
-              { x: new Date("2016- 05- 01"), y: 100.0 },
-              { x: new Date("2016- 06- 01"), y: 100.53 },
-              { x: new Date("2016- 07- 01"), y: 104.96 },
-              { x: new Date("2016- 08- 01"), y: 105.76 },
-              { x: new Date("2016- 09- 01"), y: 106.61 },
-              { x: new Date("2016- 10- 01"), y: 104.05 },
-              { x: new Date("2016- 11- 01"), y: 106.15 },
-              { x: new Date("2016- 12- 01"), y: 106.04 },
-              { x: new Date("2017- 01- 01"), y: 109.83 },
-              { x: new Date("2017- 02- 01"), y: 113.49 },
-              { x: new Date("2017- 03- 01"), y: 114.56 },
-              { x: new Date("2017- 04- 01"), y: 116.06 },
-              { x: new Date("2017- 05- 01"), y: 118.35 },
-              { x: new Date("2017- 06- 01"), y: 119.13 },
-              { x: new Date("2017- 07- 01"), y: 122.58 },
-              { x: new Date("2017- 08- 01"), y: 123.37 },
-              { x: new Date("2017- 09- 01"), y: 125.05 },
-              { x: new Date("2017- 10- 01"), y: 128.68 },
-              { x: new Date("2017- 11- 01"), y: 131.48 },
-              { x: new Date("2017- 12- 01"), y: 132.48 },
-              { x: new Date("2018- 01- 01"), y: 140.25 },
-              { x: new Date("2018- 02- 01"), y: 133.84 },
-              { x: new Date("2018- 03- 01"), y: 132.19 },
-              { x: new Date("2018- 04- 01"), y: 131.75 },
-              { x: new Date("2018- 05- 01"), y: 134.1 },
-              { x: new Date("2018- 06- 01"), y: 131.91 },
-              { x: new Date("2018- 07- 01"), y: 135.7 },
-              { x: new Date("2018- 08- 01"), y: 138.09 },
-              { x: new Date("2018- 09- 01"), y: 137.33 },
-              { x: new Date("2018- 10- 01"), y: 125.87 },
-              { x: new Date("2018- 11- 01"), y: 129.72 },
-              { x: new Date("2018- 12- 01"), y: 118.89 },
-              { x: new Date("2019- 01- 01"), y: 128.97 },
-              { x: new Date("2019- 02- 01"), y: 132.3 },
-              { x: new Date("2019- 03- 01"), y: 134.11 },
-              { x: new Date("2019- 04- 01"), y: 138.66 },
-              { x: new Date("2019- 05- 01"), y: 128.81 },
-              { x: new Date("2019- 06- 01"), y: 136.87 },
-              { x: new Date("2019- 07- 01"), y: 137.03 },
-              { x: new Date("2019- 08- 01"), y: 133.72 },
-              { x: new Date("2019- 09- 01"), y: 135.56 },
-              { x: new Date("2019- 10- 01"), y: 139.39 },
-              { x: new Date("2019- 11- 01"), y: 143.35 },
-              { x: new Date("2019- 12- 01"), y: 147.83 },
-              { x: new Date("2020- 01- 01"), y: 145.08 },
-              { x: new Date("2020- 02- 01"), y: 136.23 },
-              { x: new Date("2020- 03- 01"), y: 117.41 },
-              { x: new Date("2020- 04- 01"), y: 130.87 },
-              { x: new Date("2020- 05- 01"), y: 136.21 },
-              { x: new Date("2020- 06- 01"), y: 140.64 },
-              { x: new Date("2020- 07- 01"), y: 149.69 },
-              { x: new Date("2020- 08- 01"), y: 158.92 },
-              { x: new Date("2020- 09- 01"), y: 154.0 },
-              { x: new Date("2020- 10- 01"), y: 152.7 },
-              { x: new Date("2020- 11- 01"), y: 169.28 },
-              { x: new Date("2020- 12- 01"), y: 176.72 },
-              { x: new Date("2021- 01- 01"), y: 178.58 },
-              { x: new Date("2021- 02- 01"), y: 183.2 },
-              { x: new Date("2021- 03- 01"), y: 186.31 },
-              { x: new Date("2021- 04- 01"), y: 191.77 },
+              { x: new Date("2016- 05- 01"), y: 100 },
+              { x: new Date("2016- 06- 01"), y: 99.011 },
+              { x: new Date("2016- 07- 01"), y: 103.1 },
+              { x: new Date("2016- 08- 01"), y: 103.47 },
+              { x: new Date("2016- 09- 01"), y: 103.75 },
+              { x: new Date("2016- 10- 01"), y: 101.7 },
+              { x: new Date("2016- 11- 01"), y: 102.91 },
+              { x: new Date("2016- 12- 01"), y: 104.0 },
+              { x: new Date("2017- 01- 01"), y: 107.12 },
+              { x: new Date("2017- 02- 01"), y: 110.0 },
+              { x: new Date("2017- 03- 01"), y: 111.2 },
+              { x: new Date("2017- 04- 01"), y: 113.0 },
+              { x: new Date("2017- 05- 01"), y: 115.2 },
+              { x: new Date("2017- 06- 01"), y: 115.14 },
+              { x: new Date("2017- 07- 01"), y: 118.19 },
+              { x: new Date("2017- 08- 01"), y: 118.68 },
+              { x: new Date("2017- 09- 01"), y: 120.57 },
+              { x: new Date("2017- 10- 01"), y: 123.12 },
+              { x: new Date("2017- 11- 01"), y: 125.45 },
+              { x: new Date("2017- 12- 01"), y: 126.61 },
+              { x: new Date("2018- 01- 01"), y: 133.55 },
+              { x: new Date("2018- 02- 01"), y: 127.62 },
+              { x: new Date("2018- 03- 01"), y: 125.54 },
+              { x: new Date("2018- 04- 01"), y: 126.0 },
+              { x: new Date("2018- 05- 01"), y: 126.78 },
+              { x: new Date("2018- 06- 01"), y: 125.09 },
+              { x: new Date("2018- 07- 01"), y: 128.69 },
+              { x: new Date("2018- 08- 01"), y: 129.8 },
+              { x: new Date("2018- 09- 01"), y: 129.29 },
+              { x: new Date("2018- 10- 01"), y: 119.18 },
+              { x: new Date("2018- 11- 01"), y: 121.2 },
+              { x: new Date("2018- 12- 01"), y: 111.61 },
+              { x: new Date("2019- 01- 01"), y: 120.52 },
+              { x: new Date("2019- 02- 01"), y: 123.92 },
+              { x: new Date("2019- 03- 01"), y: 124.75 },
+              { x: new Date("2019- 04- 01"), y: 129.08 },
+              { x: new Date("2019- 05- 01"), y: 121.38 },
+              { x: new Date("2019- 06- 01"), y: 128.15 },
+              { x: new Date("2019- 07- 01"), y: 128.15 },
+              { x: new Date("2019- 08- 01"), y: 125.45 },
+              { x: new Date("2019- 09- 01"), y: 127.57 },
+              { x: new Date("2019- 10- 01"), y: 131.13 },
+              { x: new Date("2019- 11- 01"), y: 134.49 },
+              { x: new Date("2019- 12- 01"), y: 138.09 },
+              { x: new Date("2020- 01- 01"), y: 135.94 },
+              { x: new Date("2020- 02- 01"), y: 126.12 },
+              { x: new Date("2020- 03- 01"), y: 107.07 },
+              { x: new Date("2020- 04- 01"), y: 118.17 },
+              { x: new Date("2020- 05- 01"), y: 124.33 },
+              { x: new Date("2020- 06- 01"), y: 127.53 },
+              { x: new Date("2020- 07- 01"), y: 134.28 },
+              { x: new Date("2020- 08- 01"), y: 142.35 },
+              { x: new Date("2020- 09- 01"), y: 137.49 },
+              { x: new Date("2020- 10- 01"), y: 134.68 },
+              { x: new Date("2020- 11- 01"), y: 151.33 },
+              { x: new Date("2020- 12- 01"), y: 157.85 },
+              { x: new Date("2021- 01- 01"), y: 157.49 },
+              { x: new Date("2021- 02- 01"), y: 161.7 },
+              { x: new Date("2021- 03- 01"), y: 165.88 },
+              { x: new Date("2021- 04- 01"), y: 173.53 },
             ],
           },
         ],
@@ -340,8 +340,7 @@ export const RiskCharts = (type: any) => {
 
               <p>
                 Finally, to get the price at any point in time, multiply the
-                amount of shares of each ticker ($SPY is a ticker) by its
-                price.
+                amount of shares of each ticker ($SPY is a ticker) by its price.
               </p>
               <p>
                 {" "}
@@ -353,39 +352,26 @@ export const RiskCharts = (type: any) => {
           {type.type == "3" && (
             <div style={{ padding: "10px 20px" }}>
               <p>
-                The price of the coupon is referenced to 70$USD of{" "}
+                The price of the coupon is referenced to 100$USD of{" "}
                 <a
                   target="_blank"
-                  href="https://www.tradingview.com/chart/?symbol=AMEX%3AITOT"
+                  href="https://www.tradingview.com/symbols/AMEX-VT/"
                 >
-                  $ITOT
-                </a>{" "}
-                Plus 30$USD of{" "}
-                <a
-                  target="_blank"
-                  href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAXJ"
-                >
-                  $AAXJ
+                  $VT
                 </a>{" "}
                 bought at the open of June 1 2016.{" "}
               </p>
               <p>
-                The price of $ITOT in June 1st 2016 was 47.8 And we bought
-                (70/47.8) 1.465 shares.
+                The price of $VT in June 1st 2016 was 58.65 And we bought
+                (100/58.65) 1.705 shares.
               </p>
-              <p>
-                The price of $AAXJ in June 1st 2016 was 53.31 And we bought
-                (30/53.31) 0.563 shares.
-              </p>
-
               <p>
                 Finally, to get the price at any point in time, multiply the
-                amount of shares of each ticker ($ITOT is a ticker) by its
+                amount of shares of the ticker ($VT is a ticker) by its
                 price.{" "}
               </p>
               <p>
-                Eg. In april 2021 $ITOT = 95.07 and $AAXJ = 93.32. So the price
-                is: 1.465 * 95.07 + 0.563*93.32 = 191.77!
+                Eg. In april 2021 $VT = 101.78 is:  1.705 * 101.78 = 173.54!
               </p>
             </div>
           )}
@@ -419,8 +405,7 @@ export const RiskCharts = (type: any) => {
 
               <p>
                 Finally, to get the price at any point in time, multiply the
-                amount of shares of each ticker ($SPY is a ticker) by its
-                price.
+                amount of shares of each ticker ($SPY is a ticker) by its price.
               </p>
               <p>
                 Eg. In april 2021 $TQQQ = 106.63 and $UPRO = 100.87. So the

@@ -8,7 +8,6 @@ import * as api from "../api";
 export const getPosts = () => async (dispatch: any) => {
   try {
     const { data } = await api.fetchPosts();
-    console.log("FETCH ALL POST ACTION", data );
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
       console.log(error);

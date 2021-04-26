@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
+  CircularProgress,
   Grow,
   Grid,
   TextField,
@@ -36,20 +37,36 @@ const Buy = () => {
     email: '',
     type: '',
     amount: 0,
-    couponPrice: 0,
-    boughtAt: new Date()
+    openCouponPrice: 0,
+    boughtAt: new Date(),
+    completed: false,
+    closed: false,
+    profit: 0
   });
-  const [couponPrice,setCouponPrice] = useState(200); //! Probably will come as prop later.
-
-  console.log("transactions ", transactions);
+  const [openCouponPrice,setOpenCouponPrice] = useState(200); //! Probably will come as prop later.
 
   const updateDollarsBought = (e: any) => {
-    setDollarsBougth(e.target.value);
+    if(e.target.value){
+      let res = e.target.value.match(/[0-9]/g);
+      if(res){
+        setDollarsBougth(res.join(""));
+      }
+    } else{
+      setDollarsBougth(e.target.value);
+    }
+     
+    
   };
 
   const updateLoadingPayment = () => {
     setLoadingPayment(true);
   };
+
+  useEffect(()=>{
+    if(success){
+      setLoadingPayment(false);
+    }
+  }, [success])
 
   useEffect(()=>{
     dispatch(getTransactions());
@@ -60,12 +77,15 @@ const Buy = () => {
       setPaymentData({
         email: user?.result?.email,
         type: type,
-        amount: dollarsBought / couponPrice,
-        couponPrice: couponPrice,
-        boughtAt: new Date()
+        amount: dollarsBought / openCouponPrice,
+        openCouponPrice: openCouponPrice,
+        boughtAt: new Date(),
+        completed: false,
+        closed: false,
+        profit: 0
       })
     }
-  }, [setPaymentData, user, type, dollarsBought, couponPrice]);
+  }, [setPaymentData, user, type, dollarsBought, openCouponPrice]);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -84,7 +104,6 @@ const Buy = () => {
           });
 
           if (response.data.success) {
-            console.log("Successful payment");
             setSuccess(true);
           }
 
@@ -92,10 +111,10 @@ const Buy = () => {
           dispatch(createTransaction(paymentData));
 
         } catch (error) {
-          console.log("Error", error);
+          console.log("Error in payment ", error);
         }
       } else {
-        console.log(error.message);
+        console.log("Error in stripe ", error.message);
       }
     }
   };
@@ -121,13 +140,16 @@ const Buy = () => {
             alignItems="center"
           >
             <Grid item xs={7}>
+              <h1>Invest in a coupon</h1>
+            </Grid>
+            <Grid item xs={7} style={{marginBottom: '10px'}}>
               <Typography>
                 {user?.result?.givenName} {user?.result?.familyName}, remember,
                 the market is not free money. It's a long term volatile
                 investment that historically yields good results.
               </Typography>
             </Grid>
-            <Grid container xs={7}>
+            <Grid container xs={7} item>
               <TextField
                 variant="outlined"
                 value={dollarsBought}
@@ -139,7 +161,7 @@ const Buy = () => {
               </Typography>
             </Grid>
 
-            <Grid item xs={7} style={{ marginTop: "10px" }}>
+            <Grid item xs={7} style={{marginTop:'10px'}}>
               <>
                 {!success ? (
                   <form onSubmit={handleSubmit}>
@@ -161,13 +183,20 @@ const Buy = () => {
                   </form>
                 ) : (
                   <div>
-                    <h2>
-                      You just bought a sweet spatula congrats this is the best
-                      decision of you're life
-                    </h2>
+                    <Typography>
+                      <b> You bought {dollarsBought / openCouponPrice} coupons of risk {type}.</b> Your transaction is pending and will be bought at the next market open.
+                    </Typography>
+                    <Typography>
+                      You can cancel your transaction in your dashboard.
+                    </Typography>
                   </div>
                 )}
               </>
+            </Grid>
+            <Grid item xs = {7} style={{ marginTop: "10px", marginLeft: '50%' }} >
+                  {loadingPayment && (
+                    <CircularProgress />
+                  )}
             </Grid>
           </Grid>
         </Container>

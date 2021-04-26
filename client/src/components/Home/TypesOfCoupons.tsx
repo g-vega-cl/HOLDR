@@ -1,5 +1,13 @@
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Button, Container, Grow, Grid, Typography } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Grow,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -35,19 +43,14 @@ const useStyles = makeStyles({
 
 function createData(
   name: any,
+  couponPrice: any,
   returns: any,
   drawdawn: any,
   risk: any,
   buy: any
 ) {
-  return { name, returns, drawdawn, risk, buy };
+  return { name, couponPrice, returns, drawdawn, risk, buy };
 }
-
-const rows = [
-  createData("Bonds and S&P", 47, 17, 1, "1"),
-  createData("Total world market", 89, 40, 3, "3"),
-  createData("3x US markets", 723, 75, 5, "5"),
-];
 
 const stars = (num: number) => {
   if (num === 1) {
@@ -80,21 +83,75 @@ const stars = (num: number) => {
 };
 
 //Make new route. buy route.
-interface ITypesOfCoupons{
+interface ITypesOfCoupons {
   setCouponType: any;
+  tickerData: any;
 }
 
-export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
+interface ITickerData {
+  ticker: string;
+  closePrice: any;
+  date: string;
+}
+
+export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({
+  setCouponType,
+  tickerData,
+}) => {
   const history = useHistory();
   const classes = useStyles();
+  const [risk1CouponPrice, setRisk1CouponPrice] = useState(0);
+  const [risk3CouponPrice, setRisk3CouponPrice] = useState(0);
+  const [risk5CouponPrice, setRisk5CouponPrice] = useState(0);
+
+  useEffect(() => {
+    if(tickerData.length > 0){
+      let symbol = tickerData[tickerData.length-1];
+        switch (symbol.ticker) {
+          case "SPY":
+            setRisk1CouponPrice(
+              risk1CouponPrice + symbol.closePrice * (30 / 209.839996)
+            );
+            break;
+          case "BNDX":
+            setRisk1CouponPrice(
+              risk1CouponPrice + symbol.closePrice * (70 / 54.689999)
+            );
+            break;
+          case "VT":
+            setRisk3CouponPrice(
+              risk3CouponPrice + symbol.closePrice * (100 / 58.65)
+            );
+            break;
+          case "TQQQ":
+            setRisk5CouponPrice(
+              risk5CouponPrice + symbol.closePrice * (50 / 8.708333)
+            );
+            break;
+          case "UPRO":
+            setRisk5CouponPrice(
+              risk5CouponPrice + symbol.closePrice * (50 / 22.26)
+            );
+            break;
+          default:
+            break;
+        }
+    }
+  }, [tickerData]);
+
+  const rows = [
+    createData("Bonds and S&P", risk1CouponPrice, 47, 17, 1, "1"),
+    createData("Total world market", risk3CouponPrice, 75, 40, 3, "3"),
+    createData("3x US markets", risk5CouponPrice, 723, 75, 5, "5"),
+  ];
 
   const goToBuy = (couponId: string) => {
     history.push(`/buy/${couponId}`);
   };
 
-  const updateCouponType=(newType: string)=>{
+  const updateCouponType = (newType: string) => {
     setCouponType(newType);
-  }
+  };
   return (
     <div>
       <Box fontWeight="fontWeightBold" marginBottom="10px">
@@ -107,9 +164,10 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">5 year return*</StyledTableCell>
+              <StyledTableCell>Coupon price*</StyledTableCell>
+              <StyledTableCell align="right">5 year return**</StyledTableCell>
               <StyledTableCell align="right">
-                5 year maximum loss**
+                5 year maximum loss***
               </StyledTableCell>
               <StyledTableCell align="right">Risk rating</StyledTableCell>
               <StyledTableCell align="right">Buy</StyledTableCell>
@@ -119,7 +177,12 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
             {rows.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
-                  <Button onClick={()=>updateCouponType(row.buy)}>{row.name}</Button>
+                  <Button onClick={() => updateCouponType(row.buy)}>
+                    {row.name}
+                  </Button>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  ${row.couponPrice.toFixed(2)}
                 </StyledTableCell>
                 <StyledTableCell align="right" style={{ color: "green" }}>
                   {row.returns}%
@@ -131,9 +194,7 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
                   {stars(row.risk)}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                    <Button onClick={()=>goToBuy(row.buy)}>
-                        BUY
-                    </Button>
+                  <Button onClick={() => goToBuy(row.buy)}>BUY</Button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -141,12 +202,14 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({setCouponType}) => {
         </Table>
       </TableContainer>
       <Box fontWeight="fontWeightBold" marginBottom="5px" marginTop="5px">
-        * From 2016/05/01 to 2021/04/01. Includes dividends. 
+        * If the price is zero, the market is closed.
+      </Box>
+      <Box fontWeight="fontWeightBold" marginBottom="5px" marginTop="5px">
+        ** From 2016/05/01 to 2021/04/01. Includes dividends.
       </Box>
       <Box fontWeight="fontWeightBold" marginBottom="10px">
-        ** Worst case historical scenario. Buy at top and sell at bottom
+        *** Worst case historical scenario. Buy at top and sell at bottom
       </Box>
-      
     </div>
   );
 };

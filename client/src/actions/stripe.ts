@@ -8,7 +8,6 @@ import * as api from "../api";
 export const getTransactions = () => async (dispatch: any) => {
   try {
     const { data } = await api.fetchTransactions();
-    console.log("FETCH STRIPE DATA ", data);
     dispatch({ type: FETCH_TRANSACTIONS, payload: data });
   } catch (error) {
     console.log(error);
