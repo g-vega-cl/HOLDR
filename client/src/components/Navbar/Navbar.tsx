@@ -61,6 +61,10 @@ const Navbar = () => {
     },
   });
 
+  const goToDashboard = () =>{
+    history.push(`/dashboard`);
+  }
+
   return (
     <AppBar position="static" color="inherit" className={classes.appBar}>
         <Typography
@@ -85,6 +89,13 @@ const Navbar = () => {
             <Typography className={classes.userName} variant="h6">
               {user?.result.name}
             </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={goToDashboard}
+            >
+              Dashboard
+            </Button>
             <Button
               variant="contained"
               className={classes.purple}

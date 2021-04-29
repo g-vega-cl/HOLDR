@@ -202,7 +202,7 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({
         </Table>
       </TableContainer>
       <Box fontWeight="fontWeightBold" marginBottom="5px" marginTop="5px">
-        * If the price is zero, the market is closed.
+        * If the price is zero, try again in a minute.
       </Box>
       <Box fontWeight="fontWeightBold" marginBottom="5px" marginTop="5px">
         ** From 2016/05/01 to 2021/04/01. Includes dividends.

@@ -3,7 +3,6 @@ import {FETCH_TRANSACTIONS, CREATE_TRANSACTIONS, UPDATE, DELETE} from 'constants
 export default (transactions: any = [], action: any) => {
   switch (action.type) {
     case FETCH_TRANSACTIONS:
-        console.log("stripe reducer payload", action.payload)
       return action.payload;
     case CREATE_TRANSACTIONS:
       return [...transactions, action.payload];

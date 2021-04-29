@@ -1,5 +1,5 @@
+import url from 'url';
 import { CREATE_TRANSACTIONS, FETCH_TRANSACTIONS } from "constants/actionTypes";
-
 import * as api from "../api";
 
 // Action Creators
@@ -14,6 +14,15 @@ export const getTransactions = () => async (dispatch: any) => {
   }
 };
 
+export const getUserTransactions = (email:string) => async (dispatch: any) => {
+  try {
+    const { data } = await api.fetchUserTransactions(email);
+    dispatch({ type: FETCH_TRANSACTIONS, payload: data });
+  } catch (error) {
+    console.log("getUserTransactionsError ", error);
+  }
+};
+
 export const createTransaction = (newTransaction: any) => async (dispatch: any) => {
   try {
     const { data } = await api.createTransaction(newTransaction);
@@ -22,3 +31,4 @@ export const createTransaction = (newTransaction: any) => async (dispatch: any) 
     console.log(e);
   }
 };
+

@@ -1,29 +1,26 @@
 import stripe from "stripe";
 import dotenv from "dotenv";
 import StripeDB from "../models/stripeTransaction.js";
+import url from 'url';
 
-dotenv.config();
 
 export const getTransactions = async (req, res) => {
   try {
     const stripeTransactions = await StripeDB.find();
-    console.log("STRIPE TRANSACTION getTransactions controllers stripe.js ", stripeTransactions)
     res.status(200).json(stripeTransactions);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
-// export const postTransaction = async (req, res) => {
-//   const transaction = req.body;
-//   const newTransaction = new StripeDB(transaction);
-//   try {
-//     await newTransaction.save();
-//     res.status(201).json(newTransaction);
-//   } catch (error) {
-//     res.status(409).json({message: error.message});
-//   }
-// };
+export const getUserTransactions = async (req, res) => {
+  try {
+    const stripeTransactions = await StripeDB.find({email: req.query.email});
+    res.status(200).json(stripeTransactions);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
 export const payment = async (req, res) => {
   const Stripe = stripe(process.env.STRIPE_SECRET_TEST);

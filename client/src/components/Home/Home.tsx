@@ -28,6 +28,7 @@ const Home = () => {
   useEffect(() => {  
     if(tickerArrayIndex.current < 5 ){
       let f = new Date();
+      f.setDate(f.getDate()-1);
       if(f.getDay() == 6){
         f.setDate(f.getDate()-1);
       }

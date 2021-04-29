@@ -11,8 +11,8 @@ import {
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { getTransactions, createTransaction } from 'actions/stripe';
+import { useDispatch } from "react-redux";
+import { createTransaction } from 'actions/stripe';
 
 const u = {
   result: {
@@ -32,7 +32,6 @@ const Buy = () => {
   const [dollarsBought, setDollarsBougth] = useState(10);
   const { type } = useParams<{ type?: string }>();
   const dispatch = useDispatch();
-  const transactions = useSelector((state:any)=>state.stripe);
   const [paymentData, setPaymentData] = useState({
     email: '',
     type: '',
@@ -67,10 +66,6 @@ const Buy = () => {
       setLoadingPayment(false);
     }
   }, [success])
-
-  useEffect(()=>{
-    dispatch(getTransactions());
-  },[])
 
   useEffect(()=>{
     if(type){
