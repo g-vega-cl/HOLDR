@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "https://holdrapp.herokuapp.com" });
 
 //function that happens on each request.
 //Send the token to the backend so the backend can verify if we are logged in.
