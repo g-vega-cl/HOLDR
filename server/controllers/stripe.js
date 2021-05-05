@@ -39,7 +39,7 @@ export const payment = async (req, res) => {
         success: true,
       });
     } catch (error) {
-      console.log("Error in payment stripe.js controllers", error);
+      console.log("Error in payment stripe.js controllers 1", error);
       res.json({
         message: "Payment failed",
         success: false,
@@ -52,6 +52,7 @@ export const payment = async (req, res) => {
       await newTransaction.save();
       res.status(201).json(newTransaction);
     } catch (error) {
+      console.log("Error in payment stripe.js controllers 2", error);
       res.status(409).json({message: error.message});
     }
   }

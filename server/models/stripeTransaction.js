@@ -5,6 +5,7 @@ const stripeSchema = mongoose.Schema({
     type: String,
     amount: Number,
     openCouponPrice: Number,
+    depositedMoney: Number,
     boughtAt:{
         type: Date,
         default: new Date(),

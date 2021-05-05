@@ -36,8 +36,6 @@ const Navbar = () => {
     JSON.parse(localStorage.getItem("profile") || JSON.stringify(u))
   );
 
-  // console.log("usr ", user);
-
   useEffect(() => {
     const token = user?.token;
 

@@ -103,47 +103,56 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({
   const [risk1CouponPrice, setRisk1CouponPrice] = useState(0);
   const [risk3CouponPrice, setRisk3CouponPrice] = useState(0);
   const [risk5CouponPrice, setRisk5CouponPrice] = useState(0);
+  const [rows, setRows] = useState<any>([
+    createData("Bonds and S&P", risk1CouponPrice, 47, 17, 1, "1"),
+    createData("Total world market", risk3CouponPrice, 75, 40, 3, "3"),
+    createData("3x US markets", risk5CouponPrice, 723, 75, 5, "5"),
+  ]);
 
   useEffect(() => {
-    if(tickerData.length > 0){
-      let symbol = tickerData[tickerData.length-1];
+    if (tickerData.length > 0) {
+      let SPYData = 0;
+      let BNDXData = 0;
+      let VTData = 0;
+      let TQQQData = 0;
+      let UPROData = 0;
+      tickerData.forEach((symbol: any) => {
         switch (symbol.ticker) {
           case "SPY":
-            setRisk1CouponPrice(
-              risk1CouponPrice + symbol.closePrice * (30 / 209.839996)
-            );
+            SPYData = symbol.closePrice * (30 / 209.839996);
             break;
           case "BNDX":
-            setRisk1CouponPrice(
-              risk1CouponPrice + symbol.closePrice * (70 / 54.689999)
-            );
+            BNDXData = symbol.closePrice * (70 / 54.689999);
             break;
           case "VT":
-            setRisk3CouponPrice(
-              risk3CouponPrice + symbol.closePrice * (100 / 58.65)
-            );
+            VTData = symbol.closePrice * (100 / 58.65);
+
             break;
           case "TQQQ":
-            setRisk5CouponPrice(
-              risk5CouponPrice + symbol.closePrice * (50 / 8.708333)
-            );
+            TQQQData = symbol.closePrice * (50 / 8.708333);
             break;
           case "UPRO":
-            setRisk5CouponPrice(
-              risk5CouponPrice + symbol.closePrice * (50 / 22.26)
-            );
+            UPROData = symbol.closePrice * (50 / 22.26);
             break;
           default:
             break;
         }
+      });
+
+      setRisk1CouponPrice(SPYData + BNDXData);
+      setRisk3CouponPrice(VTData);
+      setRisk5CouponPrice(TQQQData + UPROData);
     }
   }, [tickerData]);
 
-  const rows = [
-    createData("Bonds and S&P", risk1CouponPrice, 47, 17, 1, "1"),
-    createData("Total world market", risk3CouponPrice, 75, 40, 3, "3"),
-    createData("3x US markets", risk5CouponPrice, 723, 75, 5, "5"),
-  ];
+  useEffect(() => {
+    const currentRows = [
+      createData("Bonds and S&P", risk1CouponPrice, 47, 17, 1, "1"),
+      createData("Total world market", risk3CouponPrice, 75, 40, 3, "3"),
+      createData("3x US markets", risk5CouponPrice, 723, 75, 5, "5"),
+    ];
+    setRows(currentRows);
+  }, [risk1CouponPrice, risk3CouponPrice, risk5CouponPrice]);
 
   const goToBuy = (couponId: string) => {
     history.push(`/buy/${couponId}`);
@@ -174,7 +183,7 @@ export const TypesOfCoupons: React.FC<ITypesOfCoupons> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row: any) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">
                   <Button onClick={() => updateCouponType(row.buy)}>

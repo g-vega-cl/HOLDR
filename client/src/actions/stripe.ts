@@ -28,7 +28,7 @@ export const createTransaction = (newTransaction: any) => async (dispatch: any) 
     const { data } = await api.createTransaction(newTransaction);
     dispatch({ type: CREATE_TRANSACTIONS, payload: data });
   } catch (e) {
-    console.log(e);
+    console.log("Error in actions create transaction ", e);
   }
 };
 
