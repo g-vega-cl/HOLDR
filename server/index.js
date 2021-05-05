@@ -21,6 +21,10 @@ app.use('/tutorial', tutorialRoutes);
 app.use('/users', userRoutes);
 app.use('/payment', stripeRoutes);
 
+app.get('/', (req,res)=>{
+  res.send('Welcome to HOLDR');
+})
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
