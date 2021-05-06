@@ -139,7 +139,7 @@ const Auth = () => {
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
-          <Grid container justify="flex-start">
+          {/* <Grid container justify="flex-start">
             <Grid item>
               <Button onClick={switchMode}>
                 {isSignUp
@@ -147,7 +147,7 @@ const Auth = () => {
                   : "Don't have an account? Sign Up"}
               </Button>
             </Grid>
-          </Grid>
+          </Grid> */}
         </form>
       </Paper>
     </Container>
