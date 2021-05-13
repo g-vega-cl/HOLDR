@@ -6,3 +6,6 @@ STRIPE DASHBOARD: https://dashboard.stripe.com/
 Google OAUTH: https://console.cloud.google.com/apis/credentials
 	https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid
 MongoDB atlas.
+
+backend in heroku
+frontend in https://app.netlify.com/sites/holdrapp/overview

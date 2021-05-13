@@ -266,7 +266,7 @@ export const RiskCharts = (type: any) => {
               { x: new Date("2021- 02- 01"), y: 691.38 },
               { x: new Date("2021- 03- 01"), y: 726.9 },
               { x: new Date("2021- 04- 01"), y: 838.8 },
-              { x: new Date("2021- 04- 01"), y: 853.88 },
+              { x: new Date("2021- 05- 01"), y: 853.88 },
             ],
           },
         ],
